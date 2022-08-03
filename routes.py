@@ -4,9 +4,9 @@ from models import Paragraphs, paragraphs_schema, paragraph_schema
 
 app = create_app()
 
-@app.route("/kelly", methods=["GET"], strict_slashes=False)
-def kelly():
-    return jsonify("I don't know what I'm doing.")
+# @app.route("/kelly", methods=["GET"], strict_slashes=False)
+# def kelly():
+#     return jsonify("I don't know what I'm doing.")
 
 @app.route("/get", methods=["GET"], strict_slashes=False)
 def paragraphs():
@@ -15,6 +15,14 @@ def paragraphs():
     results = paragraphs_schema.dump(paragraphs)
 
     return jsonify(results)
+
+@app.route('/get/<id>/', methods = ['GET'])
+def get_specific(id):
+    paragraph = Paragraphs.query.get(id)
+    db.session.get(Paragraphs, id)
+    db.session.commit()
+
+    return paragraph_schema.jsonify(paragraph)
 
 @app.route('/add', methods = ['POST'])
 def add_paragraphs():
