@@ -1,12 +1,9 @@
-from flask import current_app, jsonify, request
+import os
+from flask import current_app, jsonify, render_template, request, send_from_directory
 from app import create_app, db
 from models import Paragraphs, paragraphs_schema, paragraph_schema
 
 app = create_app()
-
-# @app.route("/kelly", methods=["GET"], strict_slashes=False)
-# def kelly():
-#     return jsonify("I don't know what I'm doing.")
 
 @app.route("/get", methods=["GET"], strict_slashes=False)
 def paragraphs():
@@ -42,6 +39,10 @@ def paragraph_delete(id):
     db.session.commit()
 
     return paragraph_schema.jsonify(paragraph)
+
+@app.route('/static/images/<path:filename>')
+def send_file(filename):
+    return send_from_directory('static/images', filename)
 
 if __name__ == "__main__":
     app.run(debug=True)
