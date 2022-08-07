@@ -23,7 +23,6 @@ def get_specific(id):
 
 @app.route('/add', methods = ['POST'])
 def add_paragraphs():
-    # return jsonify(request.json)
     title = request.json['title']
     body = request.json['body']
 
