@@ -5,7 +5,7 @@ from models import Paragraphs, paragraphs_schema, paragraph_schema
 
 app = create_app()
 
-@app.route("/get", methods=["GET"], strict_slashes=False)
+@app.route("/", methods=["GET"], strict_slashes=False)
 def paragraphs():
 
     paragraphs = Paragraphs.query.all()
